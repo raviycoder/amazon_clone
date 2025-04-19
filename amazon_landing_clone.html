@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon - Online Shopping</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #eaeded;
+        color: #111;
+        line-height: 1.4;
+        min-width: 1000px; /* Minimum width to prevent layout breaking */
+        overflow-x: hidden; /* Prevent horizontal scrolling when sidebar opens */
+      }
+
+      a {
+        text-decoration: none;
+        color: #007185;
+      }
+
+      a:hover {
+        color: #c7511f;
+        text-decoration: underline;
+      }
+
+      /* Header Styles */
+      .header {
+        background-color: #131921;
+        height: 60px;
+        color: white;
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 0 10px;
+      }
+
+      .logo {
+        width: 113px;
+        height: 50px;
+        margin: 0 10px;
+        padding: 8px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .logo:hover,
+      .header-option:hover,
+      .header-option-cart:hover,
+      .nav-item:hover {
+        border: 1px solid white;
+        border-radius: 2px;
+      }
+
+      .location-user {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      .location-user svg {
+        margin-right: px;
+        margin-top: 10px;
+      }
+
+      .address-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .location-user .deliver-to {
+        font-weight: normal;
+        margin-right: 5px;
+        font-size: 12px;
+        color: #ccccc1;
+      }
+
+      .location-user .address {
+        font-weight: 800;
+        font-size: 14px;
+      }
+
+      .location-user:hover {
+        color: #febd69;
+      }
+
+      .header-search {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 0 15px;
+      }
+
+      .search-select {
+        padding: 10px;
+        background-color: #f3f3f3;
+        border-right: 1px solid #cdcdcd;
+        color: #555;
+        cursor: pointer;
+        border: none;
+        height: 40px;
+        border-radius: 4px 0 0 4px;
+        font-size: 12px;
+      }
+
+      .search-input {
+        height: 40px;
+        padding: 10px;
+        border: none;
+        width: 100%;
+        outline: none;
+        font-size: 15px;
+      }
+
+      .search-button {
+        width: 45px;
+        background-color: #febd69;
+        height: 40px;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+      }
+
+      .search-button:hover {
+        background-color: #f3a847;
+      }
+
+      .header-nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-option {
+        display: flex;
+        flex-direction: column;
+        margin: 0 8px;
+        padding: 5px 9px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .header-option-one {
+        font-size: 12px;
+        color: #ccc;
+      }
+
+      .header-option-two {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .header-option-cart {
+        display: flex;
+        align-items: flex-end;
+        color: white;
+        padding: 5px 9px;
+        margin: 0 8px;
+      }
+
+      .cart-count {
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 2px;
+      }
+
+      /* Navigation Bar */
+      .nav {
+        height: 39px;
+        background-color: #232f3e;
+        display: flex;
+        align-items: center;
+        color: white;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0 10px;
+        position: relative;
+      }
+
+      .nav-item {
+        display: inline-block;
+        padding: 8px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0 1px;
+      }
+
+      .nav-item:first-child {
+        font-weight: bold;
+        margin-left: 5px;
+      }
+
+      .nav-item.all {
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-item.all:hover {
+        border-color: white;
+      }
+
+      /* Address Bar */
+      .address-bar {
+        height: 34px;
+        padding: 5px 10px;
+        background-color: #37475a;
+        color: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .deliver-to {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .pin-code {
+        font-weight: bold;
+        margin-left: 5px;
+      }
+
+      /* Hero Section */
+      .hero {
+        width: 100%;
+        height: 600px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, #eaeded),
+          url("https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+        background-size: cover;
+        background-position: center center;
+        z-index: 1;
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 1) 80%,
+          transparent 100%
+        );
+        margin-bottom: -300px; /* Pull the content up over the hero */
+      }
+
+      /* Main Content Grid */
+      .home {
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding: 0 15px;
+        z-index: 2;
+        position: relative;
+      }
+
+      .product-card {
+        background-color: white;
+        padding: 15px 20px;
+        z-index: 2;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .product-card h2 {
+        font-size: 21px;
+        margin-bottom: 15px;
+        color: #0f1111;
+      }
+
+      .product-card img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        margin-bottom: 15px;
+      }
+
+      .product-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .small-product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .small-product img {
+        max-height: 100px;
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .small-product p {
+        font-size: 12px;
+        margin-top: 5px;
+      }
+
+      .see-more {
+        margin-top: 15px;
+        font-size: 13px;
+        display: inline-block;
+      }
+
+      /* Footer */
+      .back-to-top {
+        background-color: #37475a;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: 50px;
+        cursor: pointer;
+      }
+
+      .back-to-top:hover {
+        background-color: #485769;
+      }
+
+      .footer {
+        background-color: #232f3e;
+        color: white;
+        padding: 40px 0;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .footer-column {
+        width: 200px;
+        margin-bottom: 20px;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 15px;
+        font-size: 16px;
+        font-weight: normal;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column li {
+        margin-bottom: 10px;
+        font-size: 13px;
+        color: #ddd;
+        cursor: pointer;
+      }
+
+      .footer-column li:hover {
+        text-decoration: underline;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background-color: #3a4553;
+        margin: 20px 0;
+        width: 100%;
+      }
+
+      .footer-logo {
+        text-align: center;
+        padding: 30px 0;
+        background-color: #232f3e;
+      }
+
+      .footer-bottom {
+        background-color: #131a22;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+      }
+
+      /* Product styling */
+      .rating {
+        color: #ffa41c;
+        margin-bottom: 5px;
+      }
+
+      .price {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .prime {
+        color: #00a8e1;
+        font-size: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .prime::before {
+        content: "✓";
+        margin-right: 5px;
+      }
+
+      /* Deal badging */
+      .deal-badge {
+        background-color: #cc0c39;
+        color: white;
+        font-size: 12px;
+        padding: 4px 6px;
+        display: inline-block;
+        margin-bottom: 5px;
+        border-radius: 2px;
+      }
+
+      /* Responsive design */
+      @media (max-width: 1200px) {
+        .product-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 992px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .header-search {
+          display: none;
+        }
+
+        .header-nav {
+          margin-right: 0;
+        }
+
+        .footer {
+          padding: 20px;
+        }
+
+        .footer-column {
+          width: 45%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header-option-one {
+          display: none;
+        }
+
+        .footer-column {
+          width: 100%;
+        }
+      }
+
+      /* Carousel for hero section */
+      .hero-carousel {
+        position: relative;
+      }
+
+      .carousel-controls {
+        position: absolute;
+        top: 30%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+
+      .carousel-button {
+        background: none;
+        border: 1px solid #d5d9d9;
+        width: 45px;
+        height: 80px;
+        border-radius: 3px;
+
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        opacity: 0.8;
+      }
+
+      .carousel-button:hover {
+        opacity: 1;
+      }
+
+      /* Sidebar Styles */
+      .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 200;
+        display: none;
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -365px; /* Start off-screen */
+        width: 365px;
+        height: 100%;
+        background-color: white;
+        z-index: 300;
+        transition: left 0.3s ease-in-out;
+        overflow-y: auto;
+      }
+
+      .sidebar-header {
+        background-color: #232f3e;
+        color: white;
+        padding: 15px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+
+      .sidebar-header-user {
+        margin-left: 10px;
+      }
+
+      .sidebar-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+      }
+
+      .sidebar-nav {
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .sidebar-section {
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .sidebar-section-title {
+        font-weight: bold;
+        color: #111;
+        padding: 0 25px 10px;
+        font-size: 16px;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 25px;
+        color: #111;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: #eaeded;
+      }
+
+      .sidebar-nav-item i {
+        margin-right: 15px;
+        font-size: 16px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .sidebar-nav-item span {
+        flex: 1;
+        font-size: 16px;
+      }
+
+      .sidebar-nav-arrow {
+        color: #555;
+        margin-right: -300px;
+      }
+
+      .sidebar-primary {
+        font-weight: bold;
+      }
+
+      .sidebar-footer {
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+      }
+
+      body.sidebar-open {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <svg
+          height="512px"
+          style="enable-background: new 0 0 512 512"
+          version="1.1"
+          viewBox="0 0 512 512"
+          width="512px"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g id="形状_4_3_" style="enable-background: new">
+            <g id="形状_4">
+              <g>
+                <path
+                  d="M342.951,247.745c-8.171-4.596-17.69-5.941-26.687-5.731     l24.238-34.603c2.244-3.111,3.511-5.072,3.521-6.572l0.004-8.956c-0.004-1.546-1.202-2.635-2.699-2.638l-46.794,0.006     c-1.441-0.003-2.637,1.057-2.646,2.644v10.441c0.012,1.562,1.21,2.629,2.705,2.629l24.449,0.003l-28.08,40.285     c-1.711,2.586-1.741,5.483-1.741,7.176v10.591c0,1.534,1.701,3.288,3.331,2.419c15.925-8.46,35.037-7.637,49.441-0.091     c1.763,0.922,3.443-0.854,3.443-2.387v-11.139C345.292,250.316,344.798,248.781,342.951,247.745z M180.164,187.902     c-8.372,0-16.213,4.305-19.666,13.529c-3.987-9.225-9.568-13.529-18.472-13.529c-8.769,0-15.281,4.305-18.736,13.529h-0.266     v-9.537c-0.089-1.333-1.202-2.384-2.588-2.454l-13.257,0.003c-1.519,0-2.749,1.17-2.749,2.632l-0.009,73.063     c0.109,1.299,1.192,2.314,2.546,2.404h14.236c1.516,0,2.748-1.173,2.745-2.629l0.006-38.727c0-8.457-0.4-20.142,9.834-20.142     c10.098,0,8.77,11.994,8.77,20.142l0.013,38.729c0,1.403,1.126,2.533,2.555,2.626h14.22c1.514,0,2.744-1.173,2.744-2.629v-38.727     c0-4.153-0.134-10.302,1.33-13.993c1.462-3.688,5.05-5.994,8.505-5.994c4.119,0,7.309,1.384,8.371,6.304     c0.666,2.921,0.398,10.607,0.398,13.684l0.003,38.729c0,1.403,1.128,2.533,2.557,2.626h14.219c1.516,0,2.746-1.173,2.746-2.629     l0.012-46.107c0-7.844,0.93-16.759-3.591-22.907C192.655,190.362,186.144,187.902,180.164,187.902z M384.308,187.902     c-20.597,0-32.024,17.682-32.024,40.435c0,22.604,11.297,40.746,32.024,40.746c19.934,0,32.555-17.684,32.555-39.976     C416.862,206.045,405.438,187.902,384.308,187.902z M384.308,254.014c-11.159,0-11.028-19.064-11.028-27.982     s0.662-23.214,11.162-23.214c4.515,0,7.707,1.999,9.3,7.071c1.862,5.842,2.128,13.222,2.128,19.373     C395.869,238.638,395.341,254.014,384.308,254.014z M482.25,196.515c-3.986-6.304-10.231-8.612-16.613-8.612     c-9.831,0-15.411,4.769-19.395,14.761h-0.271v-11.174c-0.26-1.135-1.283-1.987-2.527-2.049l-13.204,0.003     c-1.436,0-2.614,1.051-2.737,2.384l0.023,73.089c0,1.403,1.126,2.533,2.557,2.626h14.182c1.518,0,2.749-1.173,2.772-2.629V225.57     c0-4.92,0.266-9.379,2.262-13.838c1.593-3.534,4.779-5.842,8.235-5.842c9.837,0,8.905,11.684,8.905,19.68v39.673     c0.152,1.243,1.218,2.215,2.536,2.299h14.271c1.406,0,2.567-1.004,2.73-2.299v-45.977     C485.976,212.193,485.976,202.356,482.25,196.515z M274.564,240.964v-22.179c0-9.398,0.666-18.031-6.26-24.5     c-5.459-5.238-14.515-7.089-21.44-7.089c-13.547,0-28.664,5.058-31.835,21.796c-0.336,1.78,0.96,2.714,2.125,2.977l13.797,1.494     c1.291-0.067,2.225-1.337,2.473-2.617c1.187-5.767,6.013-8.551,11.441-8.551c2.931,0,6.26,1.08,7.992,3.7     c1.996,2.927,1.731,6.934,1.731,10.324v1.848c-8.257,0.925-19.044,1.541-26.768,4.932c-8.922,3.852-15.18,11.708-15.18,23.267     c0,14.789,9.322,22.187,21.307,22.187c10.122,0,15.655-2.387,23.471-10.348c2.583,3.741,3.431,5.557,8.158,9.487     c1.063,0.571,2.42,0.511,3.364-0.333l0.032,0.032c2.842-2.53,8.009-7.016,10.918-9.455c1.16-0.945,0.955-2.486,0.047-3.782     C277.335,250.559,274.564,247.635,274.564,240.964z M251.925,247.751c-2.265,4.01-5.86,6.47-9.854,6.47     c-5.461,0-8.657-4.161-8.657-10.321c0-12.122,10.875-14.331,21.175-14.331v3.084C254.589,238.2,254.72,242.819,251.925,247.751z      M87.947,240.964v-22.179c0-9.398,0.666-18.031-6.258-24.5c-5.461-5.238-14.517-7.089-21.441-7.089     c-13.547,0-28.664,5.058-31.834,21.796c-0.337,1.78,0.958,2.714,2.124,2.977l13.797,1.494c1.291-0.067,2.227-1.337,2.473-2.617     c1.185-5.767,6.013-8.551,11.442-8.551c2.928,0,6.258,1.08,7.991,3.7c1.996,2.927,1.73,6.934,1.73,10.324v1.848     c-8.257,0.925-19.044,1.541-26.769,4.932c-8.921,3.852-15.18,11.708-15.18,23.267c0,14.789,9.32,22.187,21.307,22.187     c10.12,0,15.656-2.387,23.469-10.348c2.585,3.741,3.432,5.557,8.161,9.487c1.061,0.571,2.42,0.511,3.363-0.333l0.033,0.032     c2.841-2.53,8.011-7.016,10.917-9.455c1.158-0.945,0.954-2.486,0.047-3.782C90.718,250.559,87.947,247.635,87.947,240.964z      M65.308,247.751c-2.263,4.01-5.86,6.47-9.854,6.47c-5.458,0-8.655-4.161-8.655-10.321c0-12.122,10.876-14.331,21.174-14.331     v3.084C67.973,238.2,68.105,242.819,65.308,247.751z"
+                  style="fill-rule: evenodd; clip-rule: evenodd; fill: #ffffff"
+                />
+              </g>
+            </g>
+          </g>
+          <g id="形状_4_2_" style="enable-background: new">
+            <g id="形状_4_1_">
+              <g>
+                <path
+                  d="M307.486,289.35c-29.959,12.709-62.519,18.852-92.138,18.852     c-43.908,0-86.42-12.043-120.796-32.048c-3.007-1.75-5.24,1.34-2.739,3.596c31.865,28.773,73.968,46.055,120.728,46.055     c33.36,0,72.106-10.491,98.83-30.212C315.792,292.329,312.006,287.433,307.486,289.35z M333.894,274.189     c-2.913-3.592-27.977-6.697-43.272,4.048c-2.352,1.654-1.947,3.928,0.66,3.616c8.615-1.027,27.793-3.333,31.211,1.044     c3.421,4.377-3.803,22.415-7.025,30.472c-0.978,2.434,1.119,3.42,3.325,1.576C333.129,302.948,336.832,277.823,333.894,274.189z"
+                  style="fill-rule: evenodd; clip-rule: evenodd; fill: #f2941b"
+                />
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="location-user">
+        <svg
+          width="20px"
+          height="20px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11.9155 2C10.4805 2 9.07122 2.39108 7.84129 3.12904C5.46089 4.55727 4 7.13211 4 9.90941C4 11.47 4.46194 12.9957 5.3276 14.2942L9.61325 20.7226C10.1453 21.5207 11.0409 22 12 22C12.9591 22 13.8547 21.5207 14.3868 20.7227L18.6724 14.2942C19.5381 12.9957 20 11.47 20 9.90941C20 7.1321 18.5391 4.55727 16.1587 3.12904C14.9288 2.39108 13.5195 2 12.0845 2H11.9155ZM8.87028 4.84402C9.78989 4.29226 10.8436 4 11.9155 4H12.0845C13.1564 4 14.2101 4.29226 15.1297 4.84402C16.9088 5.91149 18 7.83594 18 9.90941C18 11.0752 17.6549 12.2148 17.0083 13.1848L12.7227 19.6132C12.5616 19.8549 12.2904 20 12 20C11.7096 20 11.4384 19.8549 11.2773 19.6132L6.9917 13.1848C6.34506 12.2148 6 11.0752 6 9.90941C6 7.83594 7.09117 5.91149 8.87028 4.84402Z"
+              fill="#ffffff"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8ZM8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10C16 12.2091 14.2091 14 12 14C9.79086 14 8 12.2091 8 10Z"
+              fill="#ffffff"
+            ></path>
+          </g>
+        </svg>
+        <div class="address-container">
+          <span class="deliver-to">Deliver to</span>
+          <span class="address">india</span>
+        </div>
+      </div>
+      <div class="header-search">
+        <select class="search-select">
+          <option>All</option>
+          <option>Books</option>
+          <option>Electronics</option>
+          <option>Home</option>
+          <option>Fashion</option>
+          <option>Computers</option>
+          <option>Kitchen</option>
+          <option>Sports</option>
+        </select>
+        <input class="search-input" type="text" placeholder="Search Amazon" />
+        <button class="search-button">
+          <svg
+            fill="#333333"
+            height="20px"
+            width="20px"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 488.4 488.4"
+            xml:space="preserve"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <g>
+                <g>
+                  <path
+                    d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="header-nav">
+        <div class="header-option">
+          <span class="header-option-one">Hello, Sign in</span>
+          <span class="header-option-two">Account & Lists</span>
+        </div>
+        <div class="header-option">
+          <span class="header-option-one">Returns</span>
+          <span class="header-option-two">& Orders</span>
+        </div>
+        <div class="header-option-cart">
+          <svg
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            id="cart-number"
+            class="icon glyph"
+          >
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M22,8.24l-1.81,7.25A2,2,0,0,1,18.22,17H9.8a2,2,0,0,1-2-1.55L5.2,4H3A1,1,0,0,1,3,2H5.2a2,2,0,0,1,2,1.55L9.8,15h8.42L20,7.76A1,1,0,0,1,22,8.24ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Zm-5,0A1.5,1.5,0,1,0,13,20.5,1.5,1.5,0,0,0,11.5,19Z"
+                style="fill: #ffffff"
+              />
+              <!-- Replaced X mark with text "1" -->
+              <text
+                class="cart-count"
+                x="14"
+                y="8.5"
+                font-family="Arial"
+                font-size="5"
+                font-weight="bold"
+                text-anchor="middle"
+                fill="#F08804"
+              >
+                4
+              </text>
+            </g>
+          </svg>
+
+          <span class="header-option-two">Cart</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-header-user">Hello, Sign in</span>
+        <button class="sidebar-close" id="sidebar-close">&times;</button>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-item sidebar-primary">
+          <i>👤</i>
+          <span>Browse Amazon</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Trending</div>
+        <div class="sidebar-nav-item">
+          <span>Best Sellers</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>New Releases</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Movers & Shakers</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Digital Content & Devices</div>
+        <div class="sidebar-nav-item">
+          <span>Amazon Music</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Kindle E-readers & Books</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Amazon Appstore</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Shop By Department</div>
+        <div class="sidebar-nav-item">
+          <span>Electronics</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Computers</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Smart Home</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Arts & Crafts</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Automotive</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Baby</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Beauty & Personal Care</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Women's Fashion</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Men's Fashion</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Health & Household</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Home & Kitchen</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Programs & Features</div>
+        <div class="sidebar-nav-item">
+          <span>Gift Cards</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Amazon Live</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>International Shopping</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Help & Settings</div>
+        <div class="sidebar-nav-item">
+          <span>Your Account</span>
+          <span class="sidebar-nav-arrow">›</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Customer Service</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav">
+      <div class="nav-item all" id="sidebar-open">☰ All</div>
+      <div class="nav-item">Today's Deals</div>
+      <div class="nav-item">Customer Service</div>
+      <div class="nav-item">Registry</div>
+      <div class="nav-item">Gift Cards</div>
+      <div class="nav-item">Sell</div>
+      <div class="nav-item">Best Sellers</div>
+      <div class="nav-item">Amazon Basics</div>
+      <div class="nav-item">Prime</div>
+      <div class="nav-item">New Releases</div>
+      <div class="nav-item">Books</div>
+      <div class="nav-item">Fashion</div>
+      <div class="nav-item">Electronics</div>
+      <div class="nav-item">Computers</div>
+    </div>
+
+    <!-- Address Bar -->
+    <div class="address-bar">
+      <div class="deliver-to">
+        <span>Deliver to</span>
+        <span class="pin-code">User - New York 10001</span>
+      </div>
+    </div>
+
+    <!-- Hero/Banner -->
+    <div class="hero-carousel">
+      <div class="hero"></div>
+      <div class="carousel-controls">
+        <button class="carousel-button" style="margin-left: 10px">
+          &#10094;
+        </button>
+        <button class="carousel-button" style="margin-right: 10px">
+          &#10095;
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Products Grid -->
+    <div class="home">
+      <div class="product-grid">
+        <!-- Card 1 -->
+        <div class="product-card">
+          <h2>Deals in Electronics</h2>
+          <img
+            src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Electronics"
+          />
+          <div class="deal-badge">Deal of the day</div>
+          <div class="price">From $199.99</div>
+          <div class="rating">★★★★☆ (1,245)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">Shop all deals</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-card">
+          <h2>Shop by Category</h2>
+          <div class="product-grid-4">
+            <div class="small-product">
+              <img
+                src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60"
+                alt="Shoes"
+              />
+              <p>Shoes</p>
+            </div>
+            <div class="small-product">
+              <img
+                src="https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60"
+                alt="Kitchen"
+              />
+              <p>Kitchen</p>
+            </div>
+            <div class="small-product">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60"
+                alt="Electronics"
+              />
+              <p>Electronics</p>
+            </div>
+            <div class="small-product">
+              <img
+                src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60"
+                alt="Fashion"
+              />
+              <p>Fashion</p>
+            </div>
+          </div>
+          <a href="#" class="see-more">Shop all categories</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="product-card">
+          <h2>Top rated in Home</h2>
+          <img
+            src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Home Decor"
+          />
+          <div class="price">$34.99</div>
+          <div class="rating">★★★★★ (892)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">See more top rated products</a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="product-card">
+          <h2>Recommended for you</h2>
+          <img
+            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Watch"
+          />
+          <div class="price">$129.99</div>
+          <div class="rating">★★★★☆ (523)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">View your recommendations</a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="product-card">
+          <h2>Best Sellers in Books</h2>
+          <img
+            src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Books"
+          />
+          <div class="price">Starting at $12.99</div>
+          <div class="rating">★★★★☆ (2,123)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">Shop all best sellers</a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="product-card">
+          <h2>Popular in Clothing</h2>
+          <img
+            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Clothing"
+          />
+          <div class="deal-badge">Limited time offer</div>
+          <div class="price">From $19.99</div>
+          <div class="rating">★★★★☆ (734)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">Shop popular styles</a>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="product-card">
+          <h2>New in Electronics</h2>
+          <img
+            src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Electronics"
+          />
+          <div class="deal-badge">New Release</div>
+          <div class="price">$299.99</div>
+          <div class="rating">★★★★★ (87)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">Discover more</a>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="product-card">
+          <h2>Explore Amazon Devices</h2>
+          <img
+            src="https://images.unsplash.com/photo-1558637845-c8b7ead71a3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            alt="Amazon Devices"
+          />
+          <div class="price">Starting at $49.99</div>
+          <div class="rating">★★★★☆ (11,245)</div>
+          <div class="prime">Prime</div>
+          <a href="#" class="see-more">See all devices</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top">Back to top</div>
+
+    <!-- Footer -->
+    <div style="background-color: #232f3e; padding: 0">
+      <div class="footer">
+        <div class="footer-column">
+          <h3>Get to Know Us</h3>
+          <ul>
+            <li>Careers</li>
+            <li>Blog</li>
+            <li>About Amazon</li>
+            <li>Investor Relations</li>
+            <li>Amazon Devices</li>
+            <li>Amazon Science</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Make Money with Us</h3>
+          <ul>
+            <li>Sell products on Amazon</li>
+            <li>Sell on Amazon Business</li>
+            <li>Sell apps on Amazon</li>
+            <li>Become an Affiliate</li>
+            <li>Advertise Your Products</li>
+            <li>Self-Publish with Us</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Amazon Payment Products</h3>
+          <ul>
+            <li>Amazon Business Card</li>
+            <li>Shop with Points</li>
+            <li>Reload Your Balance</li>
+            <li>Amazon Currency Converter</li>
+            <li>Gift Cards</li>
+            <li>Amazon Cash</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Let Us Help You</h3>
+          <ul>
+            <li>Amazon and COVID-19</li>
+            <li>Your Account</li>
+            <li>Your Orders</li>
+            <li>Shipping Rates & Policies</li>
+            <li>Returns & Replacements</li>
+            <li>Help</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <div class="logo" style="margin: 0 auto; height: 30px; border: none">
+          amazon
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © 1996-2025, Amazon.com, Inc. or its affiliates. All rights reserved.
+        This is a demo website for educational purposes only.
+      </p>
+    </div>
+
+    <script>
+      // Simulating dynamic data
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sidebar functionality
+        const sidebarOpen = document.getElementById("sidebar-open");
+        const sidebarClose = document.getElementById("sidebar-close");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarBackdrop = document.getElementById("sidebar-backdrop");
+
+        // Open sidebar
+        sidebarOpen.addEventListener("click", function () {
+          sidebar.style.left = "0";
+          sidebarBackdrop.style.display = "block";
+          setTimeout(() => {
+            sidebarBackdrop.style.opacity = "1";
+          }, 50);
+          document.body.classList.add("sidebar-open");
+        });
+
+        // Close sidebar
+        function closeSidebar() {
+          sidebar.style.left = "-365px";
+          sidebarBackdrop.style.opacity = "0";
+          setTimeout(() => {
+            sidebarBackdrop.style.display = "none";
+          }, 300);
+          document.body.classList.remove("sidebar-open");
+        }
+
+        sidebarClose.addEventListener("click", closeSidebar);
+        sidebarBackdrop.addEventListener("click", closeSidebar);
+
+        // Make all sidebar nav items clickable (just for demo)
+        const sidebarNavItems = document.querySelectorAll(".sidebar-nav-item");
+        sidebarNavItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            // For demo purposes, we're just closing the sidebar when an item is clicked
+            if (!this.classList.contains("sidebar-primary")) {
+              closeSidebar();
+            }
+          });
+        });
+
+        // Simulate cart counter
+        // const cartCount = document.querySelector(".cart-count");
+        // let count = Math.floor(Math.random() * 5);
+        // cartCount.textContent = `🛒 ${count}`;
+
+        // Back to top functionality
+        document
+          .querySelector(".back-to-top")
+          .addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+
+        // Simulate loading more products on scroll
+        window.addEventListener("scroll", function () {
+          if (
+            window.innerHeight + window.scrollY >=
+            document.body.offsetHeight - 500
+          ) {
+            // Only add new products if we haven't already added too many
+            const productGrid = document.querySelector(".product-grid");
+            if (productGrid.children.length < 16) {
+              setTimeout(() => {
+                addRandomProduct();
+              }, 500);
+            }
+          }
+        });
+
+        function addRandomProduct() {
+          const products = [
+            {
+              title: "Kitchen Essentials",
+              image:
+                "https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+              price: "$49.99",
+              rating: "★★★★★ (892)",
+              deal: false,
+            },
+            {
+              title: "Outdoor Gear",
+              image:
+                "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+              price: "$129.99",
+              rating: "★★★★☆ (127)",
+              deal: false,
+            },
+          ];
+
+          const randomProduct =
+            products[Math.floor(Math.random() * products.length)];
+
+          const productCard = document.createElement("div");
+          productCard.className = "product-card";
+
+          productCard.innerHTML = `
+                    <h2>${randomProduct.title}</h2>
+                    <img src="${randomProduct.image}" alt="${
+            randomProduct.title
+          }">
+                    ${
+                      randomProduct.deal
+                        ? '<div class="deal-badge">Deal of the day</div>'
+                        : ""
+                    }
+                    <div class="price">${randomProduct.price}</div>
+                    <div class="rating">${randomProduct.rating}</div>
+                    <div class="prime">Prime</div>
+                    <a href="#" class="see-more">See more</a>
+                `;
+
+          document.querySelector(".product-grid").appendChild(productCard);
+        }
+
+        // Simple carousel functionality for demonstration
+        let heroImages = [
+          "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+          "https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+          "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+        ];
+
+        let currentImageIndex = 0;
+        const hero = document.querySelector(".hero");
+
+        document
+          .querySelectorAll(".carousel-button")
+          .forEach((button, index) => {
+            button.addEventListener("click", function () {
+              if (index === 0) {
+                // Previous button
+                currentImageIndex =
+                  currentImageIndex === 0
+                    ? heroImages.length - 1
+                    : currentImageIndex - 1;
+              } else {
+                // Next button
+                currentImageIndex =
+                  currentImageIndex === heroImages.length - 1
+                    ? 0
+                    : currentImageIndex + 1;
+              }
+
+              hero.style.background = `linear-gradient(to bottom, rgba(0,0,0,0) 60%, #EAEDED), url('${heroImages[currentImageIndex]}')`;
+              hero.style.backgroundSize = "cover";
+              hero.style.backgroundPosition = "center center";
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
