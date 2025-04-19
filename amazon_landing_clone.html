@@ -568,6 +568,7 @@
       .sidebar-nav {
         padding: 15px 0;
         border-bottom: 1px solid #ddd;
+        width: 100%;
       }
 
       .sidebar-section {
@@ -584,7 +585,9 @@
 
       .sidebar-nav-item {
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        width: 100%;
         padding: 12px 25px;
         color: #111;
         text-decoration: none;
@@ -609,7 +612,6 @@
 
       .sidebar-nav-arrow {
         color: #555;
-        margin-right: -300px;
       }
 
       .sidebar-primary {
@@ -624,6 +626,348 @@
 
       body.sidebar-open {
         overflow: hidden;
+      }
+
+      /* Language Selector */
+      .language-selector {
+        position: relative;
+        margin-right: 15px;
+        cursor: pointer;
+        color: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .language-icon {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid transparent;
+      }
+
+      .language-icon:hover {
+        border-color: white;
+        border-radius: 2px;
+      }
+
+      .language-icon img {
+        width: 20px;
+        margin-right: 5px;
+      }
+
+      .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        border-radius: 3px;
+        padding: 10px 0;
+        min-width: 200px;
+        z-index: 1000;
+        display: none;
+      }
+
+      .language-dropdown.active {
+        display: block;
+      }
+
+      .language-option {
+        padding: 8px 15px;
+        color: #111;
+        cursor: pointer;
+      }
+
+      .language-option:hover {
+        background-color: #f3f3f3;
+      }
+
+      /* Quick View Modal */
+      .quick-view-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s;
+      }
+
+      .quick-view-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background-color: white;
+        width: 90%;
+        max-width: 1000px;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 4px;
+        padding: 20px;
+        position: relative;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .modal-product {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .modal-product-image {
+        flex: 0 0 40%;
+        padding: 20px;
+      }
+
+      .modal-product-image img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+      }
+
+      .modal-product-details {
+        flex: 0 0 60%;
+        padding: 20px;
+      }
+
+      .modal-product-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .modal-product-price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #B12704;
+        margin-bottom: 15px;
+      }
+
+      .modal-product-description {
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .modal-product-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 3px;
+        border: none;
+        font-weight: bold;
+      }
+
+      .btn-add-to-cart {
+        background-color: #FFD814;
+        border-color: #FCD200;
+        color: #111;
+      }
+
+      .btn-add-to-cart:hover {
+        background-color: #F7CA00;
+      }
+
+      .btn-buy-now {
+        background-color: #FFA41C;
+        border-color: #FF8F00;
+        color: #111;
+      }
+
+      .btn-buy-now:hover {
+        background-color: #FA8900;
+      }
+
+      /* Recently Viewed */
+      .recently-viewed {
+        background-color: white;
+        padding: 20px;
+        margin: 20px 15px;
+        margin-top: 30px;
+      }
+
+      .recently-viewed h3 {
+        font-size: 21px;
+        margin-bottom: 15px;
+        color: #0F1111;
+      }
+
+      .recently-viewed-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding: 10px 0;
+        scrollbar-width: thin;
+      }
+
+      .recently-viewed-item {
+        min-width: 150px;
+        text-align: center;
+      }
+
+      .recently-viewed-item img {
+        width: 100%;
+        height: 100px;
+        object-fit: contain;
+        margin-bottom: 5px;
+      }
+
+      .recently-viewed-item p {
+        font-size: 12px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Dark Mode Toggle */
+      .dark-mode-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #232F3E;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        z-index: 100;
+        transition: transform 0.3s;
+      }
+
+      .dark-mode-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #111;
+        color: #f1f1f1;
+      }
+
+      body.dark-mode .product-card {
+        background-color: #1d1d1d;
+        color: #f1f1f1;
+      }
+
+      body.dark-mode .product-card h2 {
+        color: #f1f1f1;
+      }
+
+      body.dark-mode .recently-viewed {
+        background-color: #1d1d1d;
+        color: #f1f1f1;
+      }
+
+      body.dark-mode .recently-viewed h3 {
+        color: #f1f1f1;
+      }
+
+      /* Voice Search */
+      .voice-search {
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #555;
+      }
+
+      .voice-search svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .voice-search.listening svg {
+        fill: #FF9900;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .voice-search-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s;
+      }
+
+      .voice-search-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .voice-search-content {
+        background-color: white;
+        width: 400px;
+        border-radius: 8px;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .voice-animation {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #FF9900;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse 1.5s infinite;
+      }
+
+      .voice-animation svg {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+
+      .voice-status {
+        margin-bottom: 15px;
+        font-size: 18px;
       }
     </style>
   </head>
@@ -697,6 +1041,20 @@
           <span class="address">india</span>
         </div>
       </div>
+      <!-- Language Selector (New Feature) -->
+      <div class="language-selector">
+        <div class="language-icon">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="US Flag">
+          <span>EN</span>
+        </div>
+        <div class="language-dropdown">
+          <div class="language-option" data-lang="en">English - EN</div>
+          <div class="language-option" data-lang="es">Español - ES</div>
+          <div class="language-option" data-lang="fr">Français - FR</div>
+          <div class="language-option" data-lang="de">Deutsch - DE</div>
+          <div class="language-option" data-lang="jp">日本語 - JP</div>
+        </div>
+      </div>
       <div class="header-search">
         <select class="search-select">
           <option>All</option>
@@ -709,6 +1067,15 @@
           <option>Sports</option>
         </select>
         <input class="search-input" type="text" placeholder="Search Amazon" />
+        <!-- Voice Search Button (New Feature) -->
+        <div class="voice-search">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15C13.6569 15 15 13.6569 15 12V6C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6V12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
+            <path d="M5 10V12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <button class="search-button">
           <svg
             fill="#333333"
@@ -1083,6 +1450,70 @@
           <a href="#" class="see-more">See all devices</a>
         </div>
       </div>
+      <!-- Recently Viewed Section (New Feature) -->
+      <div class="recently-viewed">
+        <h3>Recently Viewed Items</h3>
+        <div class="recently-viewed-container">
+          <!-- Items will be dynamically added here via JavaScript -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick View Modal (New Feature) -->
+    <div class="quick-view-modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-product">
+          <div class="modal-product-image">
+            <img src="" alt="Product Image">
+          </div>
+          <div class="modal-product-details">
+            <h2 class="modal-product-title"></h2>
+            <div class="rating"></div>
+            <div class="modal-product-price"></div>
+            <div class="prime"></div>
+            <p class="modal-product-description">
+              This premium product features high-quality materials and innovative design.
+              Perfect for everyday use with extended durability and performance.
+            </p>
+            <div class="modal-product-actions">
+              <button class="btn btn-add-to-cart">Add to Cart</button>
+              <button class="btn btn-buy-now">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Voice Search Modal (New Feature) -->
+    <div class="voice-search-modal">
+      <div class="voice-search-content">
+        <div class="voice-animation">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15C13.6569 15 15 13.6569 15 12V6C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6V12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
+            <path d="M5 10V12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="voice-status">Listening...</div>
+        <p>Speak now to search Amazon</p>
+      </div>
+    </div>
+    
+    <!-- Dark Mode Toggle (New Feature) -->
+    <div class="dark-mode-toggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 2V4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 20V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4.93 4.93L6.34 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17.66 17.66L19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12H4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 12H22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6.34 17.66L4.93 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19.07 4.93L17.66 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
 
     <!-- Back to Top -->
@@ -1300,6 +1731,224 @@
               hero.style.backgroundPosition = "center center";
             });
           });
+
+        // NEW FEATURES
+
+        // 1. Language Selector
+        const languageSelector = document.querySelector('.language-selector');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        const languageIcon = document.querySelector('.language-icon');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const languageDisplay = document.querySelector('.language-icon span');
+
+        languageIcon.addEventListener('click', function() {
+          languageDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(event) {
+          if (!languageSelector.contains(event.target)) {
+            languageDropdown.classList.remove('active');
+          }
+        });
+
+        languageOptions.forEach(option => {
+          option.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            languageDisplay.textContent = lang.toUpperCase();
+            languageDropdown.classList.remove('active');
+            // You would typically update the site language here
+            alert(`Language changed to ${this.textContent}`);
+          });
+        });
+
+        // 2. Quick View Functionality
+        const quickViewModal = document.querySelector('.quick-view-modal');
+        const modalClose = document.querySelector('.modal-close');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        // Function to handle quick view for a product
+        function setupQuickView(productCard) {
+          // Add quick view button to product cards
+          const quickViewBtn = document.createElement('button');
+          quickViewBtn.classList.add('btn', 'btn-quick-view');
+          quickViewBtn.style.position = 'absolute';
+          quickViewBtn.style.top = '10px';
+          quickViewBtn.style.right = '10px';
+          quickViewBtn.style.backgroundColor = '#37475A';
+          quickViewBtn.style.color = 'white';
+          quickViewBtn.style.padding = '5px 10px';
+          quickViewBtn.style.fontSize = '12px';
+          quickViewBtn.style.borderRadius = '3px';
+          quickViewBtn.style.cursor = 'pointer';
+          quickViewBtn.style.opacity = '0';
+          quickViewBtn.style.transition = 'opacity 0.3s';
+          quickViewBtn.textContent = 'Quick View';
+          
+          // Make the product card position relative to position the button
+          productCard.style.position = 'relative';
+          
+          productCard.addEventListener('mouseenter', function() {
+            quickViewBtn.style.opacity = '1';
+          });
+          
+          productCard.addEventListener('mouseleave', function() {
+            quickViewBtn.style.opacity = '0';
+          });
+          
+          quickViewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Get product data from the card
+            const title = productCard.querySelector('h2').textContent;
+            const img = productCard.querySelector('img').src;
+            const price = productCard.querySelector('.price')?.textContent || '$99.99';
+            const rating = productCard.querySelector('.rating')?.textContent || '★★★★★ (500+)';
+            
+            // Fill modal with product data
+            document.querySelector('.modal-product-title').textContent = title;
+            document.querySelector('.modal-product-image img').src = img;
+            document.querySelector('.modal-product-price').textContent = price;
+            document.querySelector('.modal-product-details .rating').textContent = rating;
+            
+            // Show modal
+            quickViewModal.classList.add('active');
+            
+            // Add to recently viewed
+            addToRecentlyViewed(title, img, price);
+          });
+          
+          productCard.appendChild(quickViewBtn);
+        }
+        
+        // Setup quick view for each product card
+        productCards.forEach(setupQuickView);
+        
+        // Close modal when clicking close button
+        modalClose.addEventListener('click', function() {
+          quickViewModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside content
+        quickViewModal.addEventListener('click', function(e) {
+          if (e.target === quickViewModal) {
+            quickViewModal.classList.remove('active');
+          }
+        });
+
+        // 3. Recently Viewed Items
+        const recentlyViewedContainer = document.querySelector('.recently-viewed-container');
+        const recentlyViewedItems = new Set(); // To avoid duplicates
+        
+        function addToRecentlyViewed(title, img, price) {
+          // Check if this item is already in the recently viewed
+          if (recentlyViewedItems.has(title)) return;
+          
+          // Create and add the item
+          const item = document.createElement('div');
+          item.classList.add('recently-viewed-item');
+          item.innerHTML = `
+            <img src="${img}" alt="${title}">
+            <p>${title}</p>
+            <p class="price">${price}</p>
+          `;
+          
+          // Add to our tracking set
+          recentlyViewedItems.add(title);
+          
+          // Add to the container
+          recentlyViewedContainer.prepend(item);
+          
+          // Limit the number of items shown
+          if (recentlyViewedContainer.children.length > 6) {
+            recentlyViewedContainer.removeChild(recentlyViewedContainer.lastChild);
+          }
+        }
+
+        // 4. Dark Mode Toggle
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use the system preference
+        const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        // Apply the saved theme
+        if (currentTheme === 'dark') {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.querySelector('svg').innerHTML = `<path d="M12 3C10.8065 3 9.66193 3.29799 8.66653 3.86329C7.67113 4.42859 6.87218 5.23875 6.36327 6.20645C5.85437 7.17415 5.65525 8.26134 5.78528 9.33558C5.91532 10.4098 6.36954 11.4208 7.09171 12.2425C7.81388 13.0643 8.77575 13.6808 9.84606 13.9723C10.9164 14.2639 12.0476 14.2162 13.0889 13.8361C14.1302 13.456 15.0368 12.7605 15.6915 11.8411C16.3463 10.9217 16.72 9.82659 16.76 8.698C16.76 8.466 16.76 8.232 16.72 8C18.4529 8.05559 20.1047 8.76536 21.3611 9.99372C22.6175 11.2221 23.3651 12.8519 23.46 14.585C23.4785 15.3522 23.3609 16.1175 23.0905 16.8461C22.8536 17.5127 22.4812 18.136 21.9887 18.6787C21.4961 19.2214 20.8926 19.6731 20.2144 20.0037C19.4588 20.3568 18.6407 20.5547 17.81 20.585C16.03 20.65 14.27 20.6 12.48 20.6H11.52C9.75 20.6 7.97 20.65 6.18 20.585C5.34932 20.5547 4.53122 20.3568 3.77558 20.0037C3.09629 19.6743 2.49142 19.2235 1.99743 18.6812C1.50344 18.139 1.12954 17.5158 0.89054 16.849C0.621234 16.1194 0.504174 15.3534 0.52301 14.585C0.58599 13.0424 1.17547 11.5689 2.196 10.4212C3.21653 9.27353 4.4996 8.5255 5.92 8.301" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+        } else {
+          darkModeToggle.querySelector('svg').innerHTML = `<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.93 4.93L6.34 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.66 17.66L19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12H4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12H22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.34 17.66L4.93 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93L17.66 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+        }
+        
+        darkModeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-mode');
+          
+          // If dark mode is active
+          if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            darkModeToggle.querySelector('svg').innerHTML = `<path d="M12 3C10.8065 3 9.66193 3.29799 8.66653 3.86329C7.67113 4.42859 6.87218 5.23875 6.36327 6.20645C5.85437 7.17415 5.65525 8.26134 5.78528 9.33558C5.91532 10.4098 6.36954 11.4208 7.09171 12.2425C7.81388 13.0643 8.77575 13.6808 9.84606 13.9723C10.9164 14.2639 12.0476 14.2162 13.0889 13.8361C14.1302 13.456 15.0368 12.7605 15.6915 11.8411C16.3463 10.9217 16.72 9.82659 16.76 8.698C16.76 8.466 16.76 8.232 16.72 8C18.4529 8.05559 20.1047 8.76536 21.3611 9.99372C22.6175 11.2221 23.3651 12.8519 23.46 14.585C23.4785 15.3522 23.3609 16.1175 23.0905 16.8461C22.8536 17.5127 22.4812 18.136 21.9887 18.6787C21.4961 19.2214 20.8926 19.6731 20.2144 20.0037C19.4588 20.3568 18.6407 20.5547 17.81 20.585C16.03 20.65 14.27 20.6 12.48 20.6H11.52C9.75 20.6 7.97 20.65 6.18 20.585C5.34932 20.5547 4.53122 20.3568 3.77558 20.0037C3.09629 19.6743 2.49142 19.2235 1.99743 18.6812C1.50344 18.139 1.12954 17.5158 0.89054 16.849C0.621234 16.1194 0.504174 15.3534 0.52301 14.585C0.58599 13.0424 1.17547 11.5689 2.196 10.4212C3.21653 9.27353 4.4996 8.5255 5.92 8.301" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+          } else {
+            localStorage.setItem('theme', 'light');
+            darkModeToggle.querySelector('svg').innerHTML = `<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.93 4.93L6.34 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.66 17.66L19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12H4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12H22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.34 17.66L4.93 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93L17.66 6.34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+          }
+        });
+
+        // 5. Voice Search Functionality 
+        const voiceSearch = document.querySelector('.voice-search');
+        const voiceSearchModal = document.querySelector('.voice-search-modal');
+        const searchInput = document.querySelector('.search-input');
+        
+        voiceSearch.addEventListener('click', function() {
+          // Check if the browser supports the Web Speech API
+          if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            voiceSearchModal.classList.add('active');
+            
+            // Setup speech recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+            
+            recognition.onstart = function() {
+              document.querySelector('.voice-status').textContent = "Listening...";
+            };
+            
+            recognition.onresult = function(event) {
+              const transcript = event.results[0][0].transcript;
+              searchInput.value = transcript;
+              document.querySelector('.voice-status').textContent = `"${transcript}"`;
+              
+              setTimeout(() => {
+                voiceSearchModal.classList.remove('active');
+              }, 1000);
+            };
+            
+            recognition.onerror = function(event) {
+              document.querySelector('.voice-status').textContent = "Could not understand. Try again.";
+              setTimeout(() => {
+                voiceSearchModal.classList.remove('active');
+              }, 1500);
+            };
+            
+            recognition.onend = function() {
+              setTimeout(() => {
+                voiceSearchModal.classList.remove('active');
+              }, 1000);
+            };
+            
+            recognition.start();
+          } else {
+            alert("Your browser doesn't support voice recognition. Try using Chrome or Edge.");
+          }
+        });
+        
+        // Close voice search modal when clicking outside
+        voiceSearchModal.addEventListener('click', function(e) {
+          if (e.target === voiceSearchModal) {
+            voiceSearchModal.classList.remove('active');
+          }
+        });
       });
     </script>
   </body>
